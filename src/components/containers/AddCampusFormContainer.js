@@ -1,27 +1,27 @@
-import React, { Component } from "react";
-import PropTypes from "prop-types";
-import { connect } from "react-redux";
-import { AddCampusFormView } from "../views";
-import { addCampusThunk } from "../../thunks";
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { AddCampusFormView } from '../views';
+import { addCampusThunk } from '../../thunks';
 
 class AddCampusFormContainer extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      name: "",
-      address: "",
-      description: "",
-      imageUrl: "",
+      name: '',
+      address: '',
+      description: '',
+      imageUrl: ''
     };
   }
 
-  handleChange = (e) => {
+  handleChange = e => {
     this.setState({
-      [e.target.name]: e.target.value,
+      [e.target.name]: e.target.value
     });
   };
 
-  handleSubmit = (e) => {
+  handleSubmit = e => {
     e.preventDefault();
     this.props.addCampus(this.state);
   };
@@ -41,12 +41,12 @@ class AddCampusFormContainer extends Component {
 
 const mapDispatch = (dispatch, ownProps) => {
   return {
-    addCampus: (campus) => dispatch(addCampusThunk(campus, ownProps)),
+    addCampus: campus => dispatch(addCampusThunk(campus, ownProps))
   };
 };
 
 AddCampusFormContainer.propTypes = {
-  addCampus: PropTypes.func.isRequired,
+  addCampus: PropTypes.func.isRequired
 };
 
 export default connect(null, mapDispatch)(AddCampusFormContainer);

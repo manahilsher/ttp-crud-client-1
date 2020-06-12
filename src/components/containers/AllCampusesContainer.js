@@ -1,8 +1,8 @@
-import React, { Component } from "react";
-import PropTypes from "prop-types";
-import { connect } from "react-redux";
-import { fetchAllCampusesThunk } from "../../thunks";
-import { AllCampusesView } from "../views";
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { fetchAllCampusesThunk } from '../../thunks';
+import { AllCampusesView } from '../views';
 
 // Smart container;
 class AllCampusesContainer extends Component {
@@ -22,24 +22,24 @@ class AllCampusesContainer extends Component {
 }
 
 // Map state to props;
-const mapState = (state) => {
+const mapState = state => {
   return {
-    hello: "hello world!!!",
-    allCampuses: state.allCampuses,
+    hello: 'hello world!!!',
+    allCampuses: state.allCampuses
   };
 };
 
 // Map dispatch to props;
-const mapDispatch = (dispatch) => {
+const mapDispatch = dispatch => {
   return {
-    fetchAllCampuses: () => dispatch(fetchAllCampusesThunk()),
+    fetchAllCampuses: () => dispatch(fetchAllCampusesThunk())
   };
 };
 
 // Type check props;
 AllCampusesContainer.propTypes = {
   allCampuses: PropTypes.array.isRequired,
-  fetchAllCampuses: PropTypes.func.isRequired,
+  fetchAllCampuses: PropTypes.func.isRequired
 };
 
 // Export our store-connected container by default;
