@@ -1,11 +1,15 @@
-import React from "react";
-import { Switch, Route } from "react-router-dom";
+import React from 'react';
+import { Switch, Route } from 'react-router-dom';
 import {
   AllCampusesContainer,
   CampusContainer,
   AddCampusFormContainer,
   EditCampusFormContainer,
-} from "../containers";
+  AllStudentsContainer,
+  StudentContainer,
+  AddStudentFormContainer,
+  EditStudentFormContainer
+} from '../containers';
 
 const RoutesView = () => {
   return (
@@ -18,6 +22,14 @@ const RoutesView = () => {
         exact
         path="/campuses/:id/edit"
         component={EditCampusFormContainer}
+      />
+      <Route exact path="/students" component={AllStudentsContainer} />
+      <Route exact path="/students/new" component={AddStudentFormContainer} />
+      <Route exact path="/students/:id" component={StudentContainer} />
+      <Route
+        exact
+        path="/students/:id/edit"
+        component={EditStudentFormContainer}
       />
     </Switch>
   );
