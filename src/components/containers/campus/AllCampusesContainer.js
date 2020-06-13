@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { fetchAllCampusesThunk, deleteCampusThunk } from "../../thunks";
-import { AllCampusesView } from "../views";
+import { fetchAllCampusesThunk, deleteCampusThunk } from "../../../thunks";
+import { AllCampusesView } from "../../views";
 
 // Smart container;
 class AllCampusesContainer extends Component {

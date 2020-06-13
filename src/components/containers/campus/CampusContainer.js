@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { fetchCampusThunk } from "../../thunks";
+import { fetchCampusThunk } from "../../../thunks";
 
-import { CampusView } from "../views";
+import { CampusView } from "../../views";
 
 class CampusContainer extends Component {
   // constructor(props) {
