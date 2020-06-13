@@ -1,34 +1,30 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import { fetchCampusThunk } from "../../../thunks";
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { fetchStudentThunk } from '../../../thunks';
 
-import { CampusView } from "../../views";
+import { StudentView } from '../../views';
 
-class CampusContainer extends Component {
-  // constructor(props) {
-  //   super(props);
-  // }
-
+class StudentContainer extends Component {
   componentDidMount() {
-    this.props.fetchCampus(this.props.match.params.id);
+    this.props.fetchStudent(this.props.match.params.id);
   }
 
   render() {
-    return <CampusView campus={this.props.campus} />;
+    return <StudentView student={this.props.student} />;
   }
 }
 
 // map state to props
-const mapState = (state) => {
+const mapState = state => {
   return {
-    campus: state.campus,
+    student: state.student
   };
 };
 
-const mapDispatch = (dispatch) => {
+const mapDispatch = dispatch => {
   return {
-    fetchCampus: (id) => dispatch(fetchCampusThunk(id)),
+    fetchStudent: id => dispatch(fetchStudentThunk(id))
   };
 };
 
-export default connect(mapState, mapDispatch)(CampusContainer);
+export default connect(mapState, mapDispatch)(StudentContainer);

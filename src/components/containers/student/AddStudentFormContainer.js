@@ -1,66 +1,68 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { AddCampusFormView } from '../../views';
-import { addCampusThunk } from '../../../thunks';
+import { AddStudentFormView } from '../../views';
+import { addStudentThunk } from '../../../thunks';
 
-class AddCampusFormContainer extends Component {
+class AddStudentFormContainer extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      name: "",
-      address: "",
-      description: "",
-      imageUrl: "",
-      isValidName: false,
-      errors: {},
+      firstName: '',
+      lastName: '',
+      email: '',
+      imageUrl: '',
+      gpa: 0.0,
+      isValidFirstName: false,
+      errors: {}
     };
   }
 
-  handleChange = (e) => {
-    if (e.target.name === "name") {
-      this.setState({ name: e.target.value }, this.validateName);
+  handleChange = e => {
+    if (e.target.firstName === 'firstName') {
+      this.setState({ firstName: e.target.value }, this.validatefirstName);
     } else {
       this.setState({
-        [e.target.name]: e.target.value,
+        [e.target.firstName]: e.target.value
       });
     }
   };
 
-  validateName = () => {
-    const { name } = this.state;
+  validateFirstName = () => {
+    const { firstName } = this.state;
     let errors = { ...this.state.errors };
     // set a valid boolean to true
     let isValidName = true;
     // check if the value is valid
-    if (name.length < 2) {
+    if (firstName.length < 2) {
       // if not, set the value to false and add error message
-      isValidName = false;
-      errors.name = "Invalid campus name";
+      isValidFirstName = false;
+      errors.firstName = 'Invalid student firstName';
     }
     //
-    // setstate with isValidName
-    if (isValidName) {
-      errors.name = "valid name";
+    // setstate with isValidFirstName
+    if (isValidFirstName) {
+      errors.firstName = 'valid firstName';
     }
-    this.setState({ isValidName, errors });
+    this.setState({ isValidFirstName, errors });
   };
 
   handleSubmit = e => {
     e.preventDefault();
-    if (this.state.isValidName) this.props.addCampus(this.state);
+    if (this.state.isValidFirstName) this.props.addStudent(this.state);
   };
 
   render() {
     return (
       <>
         {/* Can potentially be extracted into its own ErrorMessage component */}
-        {this.state.isValidName ? "" : this.state.errors.name}
-        <AddCampusFormView
-          name={this.state.name}
-          address={this.state.address}
-          description={this.state.description}
+        {this.state.isValidFirstName ? '' : this.state.errors.firstName}
+        <AddStudentFormView
+          firstName={this.state.firstName}
+          lastName={this.state.lastName}
+          email={this.state.email}
           imageUrl={this.state.imageUrl}
+          gpa={this.state.gpa}
           handleSubmit={this.handleSubmit}
           handleChange={this.handleChange}
         />
@@ -71,12 +73,12 @@ class AddCampusFormContainer extends Component {
 
 const mapDispatch = (dispatch, ownProps) => {
   return {
-    addCampus: campus => dispatch(addCampusThunk(campus, ownProps))
+    addStudent: student => dispatch(addStudentThunk(student, ownProps))
   };
 };
 
-AddCampusFormContainer.propTypes = {
-  addCampus: PropTypes.func.isRequired
+AddStudentFormContainer.propTypes = {
+  addStudent: PropTypes.func.isRequired
 };
 
-export default connect(null, mapDispatch)(AddCampusFormContainer);
+export default connect(null, mapDispatch)(AddStudentFormContainer);

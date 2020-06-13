@@ -1,23 +1,23 @@
-import React, { Component } from "react";
-import PropTypes from "prop-types";
-import { connect } from "react-redux";
-import { fetchAllCampusesThunk, deleteCampusThunk } from "../../../thunks";
-import { AllCampusesView } from "../../views";
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { fetchAllStudentsThunk, deleteStudentThunk } from '../../../thunks';
+import { AllStudentsView } from '../../views';
 
 // Smart container;
-class AllCampusesContainer extends Component {
+class AllStudentsContainer extends Component {
   componentDidMount() {
-    this.props.fetchAllCampuses();
+    this.props.fetchAllStudents();
   }
 
-  handleDelete = (id) => {
-    this.props.deleteCampus(id);
+  handleDelete = id => {
+    this.props.deleteStudent(id);
   };
 
   render() {
     return (
-      <AllCampusesView
-        allCampuses={this.props.allCampuses}
+      <AllStudentsView
+        allStudents={this.props.allStudents}
         hello={this.props.hello}
         handleDelete={this.handleDelete}
       />
@@ -29,24 +29,24 @@ class AllCampusesContainer extends Component {
 const mapState = state => {
   return {
     hello: 'hello world!!!',
-    allCampuses: state.allCampuses
+    allStudents: state.allStudents
   };
 };
 
 // Map dispatch to props;
 const mapDispatch = dispatch => {
   return {
-    fetchAllCampuses: () => dispatch(fetchAllCampusesThunk()),
-    deleteCampus: (id) => dispatch(deleteCampusThunk(id)),
+    fetchAllStudents: () => dispatch(fetchAllStudentsThunk()),
+    deleteStudent: id => dispatch(deleteStudentThunk(id))
   };
 };
 
 // Type check props;
-AllCampusesContainer.propTypes = {
-  allCampuses: PropTypes.array.isRequired,
-  fetchAllCampuses: PropTypes.func.isRequired,
-  deleteCampus: PropTypes.func.isRequired,
+AllStudentsContainer.propTypes = {
+  allStudents: PropTypes.array.isRequired,
+  fetchAllStudents: PropTypes.func.isRequired,
+  deleteStudent: PropTypes.func.isRequired
 };
 
 // Export our store-connected container by default;
-export default connect(mapState, mapDispatch)(AllCampusesContainer);
+export default connect(mapState, mapDispatch)(AllStudentsContainer);

@@ -1,22 +1,23 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { fetchCampusThunk, editCampusThunk } from '../../../thunks';
+import { fetchStudentThunk, editStudentThunk } from '../../../thunks';
 import { connect } from 'react-redux';
-import { EditCampusFormView } from '../../views';
+import { EditStudentFormView } from '../../views';
 
-class EditCampusFormContainer extends Component {
+class EditStudentFormContainer extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      name: '',
-      address: '',
-      description: '',
-      imageUrl: ''
+      firstName: '',
+      lastName: '',
+      email: '',
+      imageUrl: '',
+      gpa: 0.0
     };
   }
 
   componentDidMount() {
-    this.props.fetchCampus(this.props.match.params.id).then(({ payload }) => {
+    this.props.fetchStudent(this.props.match.params.id).then(({ payload }) => {
       this.setState(payload);
     });
   }
@@ -30,16 +31,17 @@ class EditCampusFormContainer extends Component {
   handleSubmit = e => {
     e.preventDefault();
     const id = this.props.match.params.id;
-    this.props.editCampus(id, this.state);
+    this.props.editStudent(id, this.state);
   };
 
   render() {
     return (
-      <EditCampusFormView
-        name={this.state.name}
-        address={this.state.address}
-        description={this.state.description}
+      <EditStudentFormView
+        firstName={this.state.firstName}
+        lastName={this.state.lastName}
+        email={this.state.email}
         imageUrl={this.state.imageUrl}
+        gpa={this.state.gpa}
         handleSubmit={this.handleSubmit}
         handleChange={this.handleChange}
       />
@@ -48,19 +50,19 @@ class EditCampusFormContainer extends Component {
 }
 
 const mapState = state => {
-  return { campus: state.campus };
+  return { student: state.student };
 };
 
 const mapDispatch = dispatch => {
   return {
-    fetchCampus: id => dispatch(fetchCampusThunk(id)),
-    editCampus: (id, campus) => dispatch(editCampusThunk(id, campus))
+    fetchStudent: id => dispatch(fetchStudentThunk(id)),
+    editStudent: (id, student) => dispatch(editStudentThunk(id, student))
   };
 };
 
-EditCampusFormContainer.propTypes = {
-  fetchCampus: PropTypes.func.isRequired,
-  editCampus: PropTypes.func.isRequired
+EditStudentFormContainer.propTypes = {
+  fetchStudent: PropTypes.func.isRequired,
+  editStudent: PropTypes.func.isRequired
 };
 
-export default connect(mapState, mapDispatch)(EditCampusFormContainer);
+export default connect(mapState, mapDispatch)(EditStudentFormContainer);
