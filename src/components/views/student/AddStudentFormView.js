@@ -33,7 +33,7 @@ const AddStudentFormView = props => {
           ></input>
         </div>
         <div>
-          GPA:{0.0}
+          GPA:{0}
           <input
             value={props.gpa}
             name="gpa"
