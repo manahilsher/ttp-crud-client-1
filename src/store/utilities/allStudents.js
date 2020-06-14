@@ -5,6 +5,7 @@ import axios from 'axios';
 
 // ACTION TYPES;
 const FETCH_ALL_STUDENTS = 'FETCH_ALL_STUDENTS';
+const ENROLL_STUDENT = 'ENROLL_STUDENT';
 const ADD_STUDENT = 'ADD_STUDENT';
 const EDIT_STUDENT = 'EDIT_STUDENT';
 const DELETE_STUDENT = 'DELETE_STUDENT';
@@ -38,6 +39,13 @@ const deleteStudent = id => {
   };
 };
 
+const enrollStudent = student => {
+  return {
+    type: ENROLL_STUDENT,
+    payload: student
+  };
+};
+
 // THUNK CREATORS;
 export const fetchAllStudentsThunk = () => dispatch => {
   return axios
@@ -56,10 +64,7 @@ export const addStudentThunk = (student, ownProps) => dispatch => {
       ownProps.history.push(`/students/${newStudent.id}`);
     })
     .catch(err => {
-      // console.log(err.response.data.errors[0].message);
-      // console.log(student);
       student.errors = err.response.data.errors[0].message;
-      // console.log(student);
       dispatch(addStudent(student));
     });
 };
@@ -80,18 +85,29 @@ export const deleteStudentThunk = id => dispatch => {
     .catch(err => console.log(err));
 };
 
-// REDUCER;
+export const fetchAllStudentsThunk = () => dispatch => {
+  return axios
+    .get('/api/students')
+    .then(res => res.data)
+    .then(students => dispatch(fetchAllStudents(students)))
+    .catch(err => console.log(err));
+};
+
+export const enrollStudentThunk = (campusId, studentId) => dispatch => {
+  return axios
+    .put(`/api/students/${studentId}`, { campusId: campusId })
+    .then(res => res.data)
+    .then(student => dispatch(enrollStudent(student)))
+    .catch(err => console.log(err));
+};
+
+// REDUCER
 const reducer = (state = [], action) => {
   switch (action.type) {
     case FETCH_ALL_STUDENTS:
       return action.payload;
     case ADD_STUDENT:
-      if (action.payload.errors !== null) {
-        console.log('yup errors');
-        return [...state, action.payload];
-      } else {
-        return [...state, action.payload];
-      }
+      return [...state, action.payload];
     case EDIT_STUDENT:
       return state.map(student =>
         student.id === action.payload.id ? action.payload : student
@@ -99,6 +115,10 @@ const reducer = (state = [], action) => {
     case DELETE_STUDENT:
       console.log(action.payload);
       return state.filter(student => student.id !== action.payload);
+    case ENROLL_STUDENT:
+      return state.map(student =>
+        student.id === action.payload.id ? action.payload : student
+      );
     default:
       return state;
   }
