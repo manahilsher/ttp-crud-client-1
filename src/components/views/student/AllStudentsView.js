@@ -20,7 +20,6 @@ const AllStudentsView = props => {
           <p>{student.email}</p>
           <p>GPA: {student.gpa}</p>
           <img src={student.imageUrl} width="200px" alt={student.email} />
-          {/* <p>{student.students.length} students</p> */}
           <button onClick={() => props.handleDelete(student.id)}>Delete</button>
         </div>
       ))}
