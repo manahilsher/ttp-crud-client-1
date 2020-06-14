@@ -1,11 +1,17 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const StudentView = props => {
   let campusDisplay;
   if (props.student.campus) {
     campusDisplay = (
       <div>
-        <p>Student at {props.student.campus.name}</p>
+        <p>
+          Student at{' '}
+          <Link to={`/campuses/${props.student.campus.id}`}>
+            {props.student.campus.name}
+          </Link>
+        </p>
       </div>
     );
   } else {

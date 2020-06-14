@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { fetchStudentThunk } from '../../../thunks';
+import { fetchStudentThunk, deleteStudentThunk } from '../../../thunks';
 
 import { StudentView } from '../../views';
 
@@ -23,7 +23,8 @@ const mapState = state => {
 
 const mapDispatch = dispatch => {
   return {
-    fetchStudent: id => dispatch(fetchStudentThunk(id))
+    fetchStudent: id => dispatch(fetchStudentThunk(id)),
+    deleteStudent: id => dispatch(deleteStudentThunk(id))
   };
 };
 

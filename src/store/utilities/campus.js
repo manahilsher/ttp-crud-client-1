@@ -1,24 +1,24 @@
-import axios from "axios";
+import axios from 'axios';
 
 // Action Types
-const FETCH_CAMPUS = "FETCH_CAMPUS";
+const FETCH_CAMPUS = 'FETCH_CAMPUS';
 
 // Action Creators
 
-const fetchCampus = (campus) => {
+const fetchCampus = campus => {
   return {
     type: FETCH_CAMPUS,
-    payload: campus,
+    payload: campus
   };
 };
 
 // Thunk Creators
-export const fetchCampusThunk = (id) => (dispatch) => {
+export const fetchCampusThunk = id => dispatch => {
   return axios
     .get(`/api/campuses/${id}`)
-    .then((res) => res.data)
-    .then((campus) => dispatch(fetchCampus(campus)))
-    .catch((err) => console.log(err));
+    .then(res => res.data)
+    .then(campus => dispatch(fetchCampus(campus)))
+    .catch(err => console.log(err));
 };
 
 // Reducer
