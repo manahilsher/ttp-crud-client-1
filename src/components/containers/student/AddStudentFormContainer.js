@@ -13,14 +13,16 @@ class AddStudentFormContainer extends Component {
       email: '',
       imageUrl: 'https://via.placeholder.com/480x240?text=Placeholder',
       gpa: 0.0,
-      isValidFirstName: false,
+      isValidFirstName: true,
       errors: {}
     };
   }
 
   handleChange = e => {
-    if (e.target.name === 'firstName') {
-      this.setState({ firstName: e.target.value }, this.validatefirstName);
+    // if (e.target.name === 'firstName') {
+    //   this.setState({ firstName: e.target.value });
+    if (e.target.name === 'gpa') {
+      this.setState({ gpa: parseFloat(e.target.value) });
     } else {
       this.setState({
         [e.target.name]: e.target.value
@@ -28,28 +30,47 @@ class AddStudentFormContainer extends Component {
     }
   };
 
-  validateFirstName = () => {
-    const { firstName } = this.state;
-    let errors = { ...this.state.errors };
-    // set a valid boolean to true
-    let isValidFirstName = true;
-    // check if the value is valid
-    if (firstName.length < 2) {
-      // if not, set the value to false and add error message
-      isValidFirstName = false;
-      errors.firstName = 'Invalid student firstName';
-    }
-    //
-    // setstate with isValidFirstName
-    if (isValidFirstName) {
-      errors.firstName = 'valid firstName';
-    }
-    this.setState({ isValidFirstName, errors });
-  };
+  // const { name } = this.state;
+  //   let errors = { ...this.state.errors };
+  //   // set a valid boolean to true
+  //   let isValidName = true;
+  //   // check if the value is valid
+  //   if (name.length < 2) {
+  //     // if not, set the value to false and add error message
+  //     isValidName = false;
+  //     errors.name = 'Invalid campus name';
+  //   }
+  //   //
+  //   // setstate with isValidName
+  //   if (isValidName) {
+  //     errors.name = 'valid name';
+  //   }
+  //   this.setState({ isValidName, errors });
+  // };
+
+  // validateFirstName = () => {
+  //   const { firstName } = this.state;
+  //   let errors = { ...this.state.errors };
+  //   // set a valid boolean to true
+  //   let isValidFirstName = true;
+  //   // check if the value is valid
+  //   if (firstName.length < 2) {
+  //     // if not, set the value to false and add error message
+  //     isValidFirstName = false;
+  //     errors.name = 'Invalid student firstName';
+  //   }
+  //   //
+  //   // setstate with isValidFirstName
+  //   if (isValidFirstName) {
+  //     errors.name = 'valid firstName';
+  //   }
+  //   this.setState({ isValidFirstName, errors });
+  // };
 
   handleSubmit = e => {
     e.preventDefault();
-    if (this.state.isValidFirstName) this.props.addStudent(this.state);
+
+    this.props.addStudent(this.state);
   };
 
   render() {

@@ -33,8 +33,9 @@ const AddStudentFormView = props => {
           ></input>
         </div>
         <div>
-          GPA:{0}
+          GPA:{' '}
           <input
+            type="number"
             value={props.gpa}
             name="gpa"
             onChange={props.handleChange}
@@ -61,7 +62,7 @@ AddStudentFormView.propTypes = {
   firstName: PropTypes.string.isRequired,
   lastName: PropTypes.string.isRequired,
   email: PropTypes.string.isRequired,
-  gpa: PropTypes.string.isRequired,
+  gpa: PropTypes.number.isRequired,
   imageUrl: PropTypes.string.isRequired
 };
 

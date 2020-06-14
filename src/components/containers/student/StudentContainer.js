@@ -9,8 +9,18 @@ class StudentContainer extends Component {
     this.props.fetchStudent(this.props.match.params.id);
   }
 
+  handleDelete = id => {
+    this.props.deleteStudent(id);
+    this.props.history.push('/students');
+  };
+
   render() {
-    return <StudentView student={this.props.student} />;
+    return (
+      <StudentView
+        student={this.props.student}
+        handleDelete={this.handleDelete}
+      />
+    );
   }
 }
 
