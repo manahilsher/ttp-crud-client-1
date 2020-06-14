@@ -12,7 +12,11 @@ class EditStudentFormContainer extends Component {
       lastName: '',
       email: '',
       imageUrl: '',
-      gpa: 0.0
+      gpa: 0.0,
+      errors: {
+        uniqueEmail: true,
+        validEmailFormat: true
+      }
     };
   }
 
@@ -23,29 +27,61 @@ class EditStudentFormContainer extends Component {
   }
 
   handleChange = e => {
-    this.setState({
-      [e.target.name]: e.target.value
-    });
+    if (e.target.name === 'email') {
+      this.setState({ email: e.target.value }, this.validateEmail);
+    } else if (e.target.name === 'gpa') {
+      this.setState({ gpa: parseFloat(e.target.value) });
+    } else {
+      this.setState({
+        [e.target.name]: e.target.value
+      });
+    }
   };
 
-  handleSubmit = e => {
+  validateEmail = () => {
+    let isValidEmail = false;
+    if (
+      /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(this.state.email)
+    ) {
+      isValidEmail = true;
+    }
+    let errors = this.state.errors;
+    errors.validEmailFormat = isValidEmail;
+    errors.uniqueEmail = true;
+    this.setState({ errors });
+  };
+
+  handleSubmit = async e => {
     e.preventDefault();
     const id = this.props.match.params.id;
-    this.props.editStudent(id, this.state);
-    this.props.history.push(`/students/${id}`);
+    if (this.state.errors.validEmailFormat) {
+      console.log('EMAIL FORMAT IS VALID');
+      await this.props.editStudent(id, this.state);
+    }
+    if (this.state.errors.uniqueEmail === false) {
+      // this.forceUpdate();
+    }
+
+    // this.props.editStudent(id, this.state);
+    // this.props.history.push(`/students/${id}`);
   };
 
   render() {
     return (
-      <EditStudentFormView
-        firstName={this.state.firstName}
-        lastName={this.state.lastName}
-        email={this.state.email}
-        imageUrl={this.state.imageUrl}
-        gpa={this.state.gpa}
-        handleSubmit={this.handleSubmit}
-        handleChange={this.handleChange}
-      />
+      <>
+        {this.state.errors.uniqueEmail ? '' : 'Email already being used'}
+        {this.state.errors.validEmailFormat ? '' : 'Invalid email format'}
+        <EditStudentFormView
+          firstName={this.state.firstName}
+          lastName={this.state.lastName}
+          email={this.state.email}
+          imageUrl={this.state.imageUrl}
+          gpa={this.state.gpa}
+          errors={this.state.errors}
+          handleSubmit={this.handleSubmit}
+          handleChange={this.handleChange}
+        />
+      </>
     );
   }
 }
@@ -54,10 +90,11 @@ const mapState = state => {
   return { student: state.student };
 };
 
-const mapDispatch = dispatch => {
+const mapDispatch = (dispatch, ownProps) => {
   return {
     fetchStudent: id => dispatch(fetchStudentThunk(id)),
-    editStudent: (id, student) => dispatch(editStudentThunk(id, student))
+    editStudent: (id, student) =>
+      dispatch(editStudentThunk(id, student, ownProps))
   };
 };
 

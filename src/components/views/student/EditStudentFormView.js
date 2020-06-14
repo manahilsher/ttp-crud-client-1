@@ -36,12 +36,13 @@ const EditStudentFormView = props => {
           GPA:{' '}
           <input
             type="number"
+            step="0.1"
             value={props.gpa}
             name="gpa"
             onChange={props.handleChange}
             required
-            min={0}
-            max={4}
+            min={0.0}
+            max={4.0}
           ></input>
         </div>
         <div>
@@ -50,6 +51,7 @@ const EditStudentFormView = props => {
             value={props.imageUrl}
             name="imageUrl"
             onChange={props.handleChange}
+            required
           ></input>
         </div>
         <button>Edit Student</button>

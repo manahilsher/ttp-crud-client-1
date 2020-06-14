@@ -10,6 +10,9 @@ const AllStudentsView = props => {
 
   return (
     <div className="all-students">
+      <Link to="/students/new" className="add-student">
+        New Student
+      </Link>
       {props.allStudents.map(student => (
         <div key={student.id}>
           <Link to={`/students/${student.id}`}>

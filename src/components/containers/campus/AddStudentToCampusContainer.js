@@ -20,7 +20,7 @@ class AddStudentToCampusContainer extends Component {
   };
 
   handleSubmit = e => {
-    e.preventDefault();
+    // e.preventDefault();
     this.props.handleEnrollStudent(this.props.campusId, this.state.studentId);
   };
 

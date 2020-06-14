@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 const AddStudentFormView = props => {
   return (
     <div>
-      <h4>{props.errors}</h4>
       {console.log(props.errors)}
       <form onSubmit={props.handleSubmit}>
         <div>
@@ -38,12 +37,13 @@ const AddStudentFormView = props => {
           GPA:{' '}
           <input
             type="number"
+            step="0.1"
             value={props.gpa}
             name="gpa"
             onChange={props.handleChange}
             required
-            min={0}
-            max={4}
+            min={0.0}
+            max={4.0}
           ></input>
         </div>
         <div>
@@ -52,6 +52,7 @@ const AddStudentFormView = props => {
             value={props.imageUrl}
             name="imageUrl"
             onChange={props.handleChange}
+            required
           ></input>
         </div>
         <button>Create Student</button>
@@ -68,7 +69,7 @@ AddStudentFormView.propTypes = {
   email: PropTypes.string.isRequired,
   gpa: PropTypes.number.isRequired,
   imageUrl: PropTypes.string.isRequired,
-  errors: PropTypes.string
+  errors: PropTypes.object
 };
 
 export default AddStudentFormView;

@@ -64,17 +64,24 @@ export const addStudentThunk = (student, ownProps) => dispatch => {
       ownProps.history.push(`/students/${newStudent.id}`);
     })
     .catch(err => {
-      student.errors = err.response.data.errors[0].message;
+      student.errors.uniqueEmail = false;
       dispatch(addStudent(student));
     });
 };
 
-export const editStudentThunk = (id, student) => dispatch => {
+export const editStudentThunk = (id, student, ownProps) => dispatch => {
   return axios
     .put(`/api/students/${id}`, student)
     .then(res => res.data)
-    .then(updatedStudent => dispatch(editStudent(updatedStudent)))
-    .catch(err => console.log(err));
+    .then(updatedStudent => {
+      dispatch(editStudent(updatedStudent));
+      ownProps.history.push(`/students/${updatedStudent.id}`);
+    })
+    .catch(err => {
+      console.log(err);
+      student.errors.uniqueEmail = false;
+      dispatch(editStudent(student));
+    });
 };
 
 export const deleteStudentThunk = id => dispatch => {
@@ -101,9 +108,9 @@ const reducer = (state = [], action) => {
     case ADD_STUDENT:
       return [...state, action.payload];
     case EDIT_STUDENT:
-      return state.map(student =>
-        student.id === action.payload.id ? action.payload : student
-      );
+      return state.map(student => {
+        return student.id === action.payload.id ? action.payload : student;
+      });
     case DELETE_STUDENT:
       console.log(action.payload);
       return state.filter(student => student.id !== action.payload);
