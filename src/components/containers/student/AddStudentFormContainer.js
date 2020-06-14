@@ -13,7 +13,6 @@ class AddStudentFormContainer extends Component {
       email: '',
       imageUrl: 'https://via.placeholder.com/480x240?text=Placeholder',
       gpa: 0.0,
-      isValidFirstName: true,
       errors: {}
     };
   }

@@ -40,6 +40,8 @@ const AddStudentFormView = props => {
             name="gpa"
             onChange={props.handleChange}
             required
+            min={0}
+            max={4}
           ></input>
         </div>
         <div>

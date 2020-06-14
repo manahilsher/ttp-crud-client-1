@@ -32,6 +32,7 @@ class EditStudentFormContainer extends Component {
     e.preventDefault();
     const id = this.props.match.params.id;
     this.props.editStudent(id, this.state);
+    this.props.history.push(`/students/${id}`);
   };
 
   render() {

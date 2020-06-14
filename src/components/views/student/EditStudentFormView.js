@@ -11,6 +11,7 @@ const EditStudentFormView = props => {
             value={props.firstName}
             name="firstName"
             onChange={props.handleChange}
+            required
           ></input>
         </div>
         <div>
@@ -19,6 +20,7 @@ const EditStudentFormView = props => {
             value={props.lastName}
             name="lastName"
             onChange={props.handleChange}
+            required
           ></input>
         </div>
         <div>
@@ -27,14 +29,19 @@ const EditStudentFormView = props => {
             value={props.email}
             name="email"
             onChange={props.handleChange}
+            required
           ></input>
         </div>
         <div>
-          GPA:{0.0}
+          GPA:{' '}
           <input
+            type="number"
             value={props.gpa}
             name="gpa"
             onChange={props.handleChange}
+            required
+            min={0}
+            max={4}
           ></input>
         </div>
         <div>
@@ -57,7 +64,7 @@ EditStudentFormView.propTypes = {
   firstName: PropTypes.string.isRequired,
   lastName: PropTypes.string.isRequired,
   email: PropTypes.string.isRequired,
-  gpa: PropTypes.string.isRequired,
+  gpa: PropTypes.number.isRequired,
   imageUrl: PropTypes.string.isRequired
 };
 
