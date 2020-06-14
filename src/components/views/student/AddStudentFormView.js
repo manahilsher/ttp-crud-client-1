@@ -4,6 +4,8 @@ import PropTypes from 'prop-types';
 const AddStudentFormView = props => {
   return (
     <div>
+      <h4>{props.errors}</h4>
+      {console.log(props.errors)}
       <form onSubmit={props.handleSubmit}>
         <div>
           First Name:{' '}
@@ -65,7 +67,8 @@ AddStudentFormView.propTypes = {
   lastName: PropTypes.string.isRequired,
   email: PropTypes.string.isRequired,
   gpa: PropTypes.number.isRequired,
-  imageUrl: PropTypes.string.isRequired
+  imageUrl: PropTypes.string.isRequired,
+  errors: PropTypes.string
 };
 
 export default AddStudentFormView;

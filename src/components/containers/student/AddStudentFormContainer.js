@@ -13,8 +13,9 @@ class AddStudentFormContainer extends Component {
       email: '',
       imageUrl: 'https://via.placeholder.com/480x240?text=Placeholder',
       gpa: 0.0,
-      isValidEmail: false,
-      errors: {}
+      // isValidEmail: false,
+      // emailExists: false,
+      errors: props.errors
     };
   }
 
@@ -74,23 +75,27 @@ class AddStudentFormContainer extends Component {
   //   this.setState({ isValidFirstName, errors });
   // };
 
-  handleSubmit = e => {
+  handleSubmit = async e => {
     e.preventDefault();
+    await this.props.addStudent(this.state);
 
-    this.props.addStudent(this.state);
+    if (this.state.errors !== null) {
+      this.forceUpdate();
+    }
   };
 
   render() {
     return (
       <>
         {/* Can potentially be extracted into its own ErrorMessage component */}
-        {this.state.isValidEmail ? '' : this.state.errors.email}
+        {/* {this.state.isValidEmail ? '' : this.state.errors.email} */}
         <AddStudentFormView
           firstName={this.state.firstName}
           lastName={this.state.lastName}
           email={this.state.email}
           imageUrl={this.state.imageUrl}
           gpa={this.state.gpa}
+          errors={this.state.errors}
           handleSubmit={this.handleSubmit}
           handleChange={this.handleChange}
         />
@@ -98,6 +103,12 @@ class AddStudentFormContainer extends Component {
     );
   }
 }
+
+const mapState = state => {
+  return {
+    errors: state.errors
+  };
+};
 
 const mapDispatch = (dispatch, ownProps) => {
   return {
@@ -109,4 +120,4 @@ AddStudentFormContainer.propTypes = {
   addStudent: PropTypes.func.isRequired
 };
 
-export default connect(null, mapDispatch)(AddStudentFormContainer);
+export default connect(mapState, mapDispatch)(AddStudentFormContainer);

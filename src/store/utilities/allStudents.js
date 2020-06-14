@@ -55,7 +55,13 @@ export const addStudentThunk = (student, ownProps) => dispatch => {
       dispatch(addStudent(newStudent));
       ownProps.history.push(`/students/${newStudent.id}`);
     })
-    .catch(err => console.log(err));
+    .catch(err => {
+      // console.log(err.response.data.errors[0].message);
+      // console.log(student);
+      student.errors = err.response.data.errors[0].message;
+      // console.log(student);
+      dispatch(addStudent(student));
+    });
 };
 
 export const editStudentThunk = (id, student) => dispatch => {
@@ -80,7 +86,12 @@ const reducer = (state = [], action) => {
     case FETCH_ALL_STUDENTS:
       return action.payload;
     case ADD_STUDENT:
-      return [...state, action.payload];
+      if (action.payload.errors !== null) {
+        console.log('yup errors');
+        return [...state, action.payload];
+      } else {
+        return [...state, action.payload];
+      }
     case EDIT_STUDENT:
       return state.map(student =>
         student.id === action.payload.id ? action.payload : student
