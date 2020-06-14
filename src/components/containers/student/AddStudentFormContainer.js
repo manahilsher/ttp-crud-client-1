@@ -13,14 +13,15 @@ class AddStudentFormContainer extends Component {
       email: '',
       imageUrl: 'https://via.placeholder.com/480x240?text=Placeholder',
       gpa: 0.0,
+      isValidEmail: false,
       errors: {}
     };
   }
 
   handleChange = e => {
-    // if (e.target.name === 'firstName') {
-    //   this.setState({ firstName: e.target.value });
-    if (e.target.name === 'gpa') {
+    if (e.target.name === 'email') {
+      this.setState({ email: e.target.value }, this.validateEmail);
+    } else if (e.target.name === 'gpa') {
       this.setState({ gpa: parseFloat(e.target.value) });
     } else {
       this.setState({
@@ -46,6 +47,13 @@ class AddStudentFormContainer extends Component {
   //   }
   //   this.setState({ isValidName, errors });
   // };
+
+  validateEmail = () => {
+    // const { email } = this.state;
+    // let errors = { ...this.state.errors };
+    // let isValidEmail = true;
+    // if (email)
+  };
 
   // validateFirstName = () => {
   //   const { firstName } = this.state;
@@ -76,7 +84,7 @@ class AddStudentFormContainer extends Component {
     return (
       <>
         {/* Can potentially be extracted into its own ErrorMessage component */}
-        {this.state.isValidFirstName ? '' : this.state.errors.firstName}
+        {this.state.isValidEmail ? '' : this.state.errors.email}
         <AddStudentFormView
           firstName={this.state.firstName}
           lastName={this.state.lastName}
