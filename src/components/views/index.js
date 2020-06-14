@@ -3,7 +3,7 @@ export { default as AllCampusesView } from './campus/AllCampusesView';
 export { default as CampusView } from './campus/CampusView';
 export { default as AddCampusFormView } from './campus/AddCampusFormView';
 export { default as EditCampusFormView } from './campus/EditCampusFormView';
-export { default as AllStudentsView } from './campus/AllStudentsView';
+export { default as AllStudentsView } from './student/AllStudentsView';
 export { default as StudentView } from './student/StudentView';
 export { default as AddStudentFormView } from './student/AddStudentFormView';
 export { default as EditStudentFormView } from './student/EditStudentFormView';

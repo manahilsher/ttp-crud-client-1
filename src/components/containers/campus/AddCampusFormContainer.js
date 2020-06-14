@@ -8,21 +8,21 @@ class AddCampusFormContainer extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      name: "",
-      address: "",
-      description: "",
-      imageUrl: "",
+      name: '',
+      address: '',
+      description: '',
+      imageUrl: 'https://via.placeholder.com/480x240?text=Placeholder',
       isValidName: false,
-      errors: {},
+      errors: {}
     };
   }
 
-  handleChange = (e) => {
-    if (e.target.name === "name") {
+  handleChange = e => {
+    if (e.target.name === 'name') {
       this.setState({ name: e.target.value }, this.validateName);
     } else {
       this.setState({
-        [e.target.name]: e.target.value,
+        [e.target.name]: e.target.value
       });
     }
   };
@@ -36,26 +36,27 @@ class AddCampusFormContainer extends Component {
     if (name.length < 2) {
       // if not, set the value to false and add error message
       isValidName = false;
-      errors.name = "Invalid campus name";
+      errors.name = 'Invalid campus name';
     }
     //
     // setstate with isValidName
     if (isValidName) {
-      errors.name = "valid name";
+      errors.name = 'valid name';
     }
     this.setState({ isValidName, errors });
   };
 
   handleSubmit = e => {
     e.preventDefault();
-    if (this.state.isValidName) this.props.addCampus(this.state);
+    if (this.state.isValidName && this.state.imageUrl !== '')
+      this.props.addCampus(this.state);
   };
 
   render() {
     return (
       <>
         {/* Can potentially be extracted into its own ErrorMessage component */}
-        {this.state.isValidName ? "" : this.state.errors.name}
+        {this.state.isValidName ? '' : this.state.errors.name}
         <AddCampusFormView
           name={this.state.name}
           address={this.state.address}

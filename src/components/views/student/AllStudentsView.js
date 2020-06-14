@@ -1,5 +1,5 @@
 import React from 'react';
-import './styles/AllStudentsView.css';
+import '../styles/AllStudentsView.css';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 

@@ -1,16 +1,16 @@
-import React from "react";
-import "./styles/AllCampusesView.css";
-import PropTypes from "prop-types";
-import { Link } from "react-router-dom";
+import React from 'react';
+import '../styles/AllCampusesView.css';
+import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
-const AllCampusesView = (props) => {
+const AllCampusesView = props => {
   if (!props.allCampuses.length) {
     return <div className="all-campuses">There are no campuses</div>;
   }
 
   return (
     <div className="all-campuses">
-      {props.allCampuses.map((campus) => (
+      {props.allCampuses.map(campus => (
         <div key={campus.id}>
           <Link to={`/campuses/${campus.id}`}>
             <h1>{campus.name}</h1>
@@ -25,7 +25,7 @@ const AllCampusesView = (props) => {
 };
 
 AllCampusesView.propTypes = {
-  allCampuses: PropTypes.array.isRequired,
+  allCampuses: PropTypes.array.isRequired
 };
 
 export default AllCampusesView;

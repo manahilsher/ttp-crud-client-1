@@ -11,7 +11,7 @@ class AddStudentFormContainer extends Component {
       firstName: '',
       lastName: '',
       email: '',
-      imageUrl: '',
+      imageUrl: 'https://via.placeholder.com/480x240?text=Placeholder',
       gpa: 0.0,
       isValidFirstName: false,
       errors: {}
@@ -19,11 +19,11 @@ class AddStudentFormContainer extends Component {
   }
 
   handleChange = e => {
-    if (e.target.firstName === 'firstName') {
+    if (e.target.name === 'firstName') {
       this.setState({ firstName: e.target.value }, this.validatefirstName);
     } else {
       this.setState({
-        [e.target.firstName]: e.target.value
+        [e.target.name]: e.target.value
       });
     }
   };
@@ -32,7 +32,7 @@ class AddStudentFormContainer extends Component {
     const { firstName } = this.state;
     let errors = { ...this.state.errors };
     // set a valid boolean to true
-    let isValidName = true;
+    let isValidFirstName = true;
     // check if the value is valid
     if (firstName.length < 2) {
       // if not, set the value to false and add error message

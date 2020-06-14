@@ -5,7 +5,7 @@ const StudentView = props => {
   if (props.student.campus) {
     campusDisplay = (
       <div>
-        <p>Student at {props.student.campus}</p>
+        <p>Student at {props.student.campus.name}</p>
       </div>
     );
   } else {
