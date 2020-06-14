@@ -1,12 +1,11 @@
-import React, { Component } from "react";
-import PropTypes from "prop-types";
-import { connect } from "react-redux";
-import { fetchAllStudentsThunk } from "../../../thunks";
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { fetchAllStudentsThunk } from '../../../thunks';
 
 class AddStudentToCampusContainer extends Component {
   constructor(props) {
     super(props);
-    this.state = { studentId: "" };
+    this.state = { studentId: '' };
   }
   componentDidMount() {
     this.props.fetchAllStudents();
@@ -16,11 +15,11 @@ class AddStudentToCampusContainer extends Component {
   // send a put request for the student
   // change the campus id to the id of the campus we are on
 
-  handleChange = (e) => {
+  handleChange = e => {
     this.setState({ [e.target.name]: e.target.value });
   };
 
-  handleSubmit = (e) => {
+  handleSubmit = e => {
     e.preventDefault();
     this.props.handleEnrollStudent(this.props.campusId, this.state.studentId);
   };
@@ -35,8 +34,8 @@ class AddStudentToCampusContainer extends Component {
           <select name="studentId" onChange={this.handleChange}>
             <option value="">Please select a student</option>
             {this.props.allStudents
-              .filter((s) => s.campusId !== this.props.campusId)
-              .map((student) => {
+              .filter(s => s.campusId !== this.props.campusId)
+              .map(student => {
                 console.log(student.campusId);
                 return (
                   <option value={student.id} key={student.id}>
@@ -52,13 +51,13 @@ class AddStudentToCampusContainer extends Component {
   }
 }
 
-const mapState = (state) => {
+const mapState = state => {
   return { allStudents: state.allStudents };
 };
 
-const mapDispatch = (dispatch) => {
+const mapDispatch = dispatch => {
   return {
-    fetchAllStudents: () => dispatch(fetchAllStudentsThunk()),
+    fetchAllStudents: () => dispatch(fetchAllStudentsThunk())
   };
 };
 

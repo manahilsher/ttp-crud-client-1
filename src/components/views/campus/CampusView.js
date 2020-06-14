@@ -1,5 +1,10 @@
 import React from 'react';
-import { StudentNameListContainer } from '../../containers';
+import '../styles/CampusView.css';
+import { Link } from 'react-router-dom';
+import {
+  StudentNameListContainer,
+  AddStudentToCampusContainer
+} from '../../containers';
 
 const CampusView = props => {
   return (
@@ -11,6 +16,18 @@ const CampusView = props => {
       <p>{props.campus.description}</p>
 
       <StudentNameListContainer students={props.campus.students} />
+
+      <AddStudentToCampusContainer
+        campusId={props.campus.id}
+        handleEnrollStudent={props.handleEnrollStudent}
+      />
+
+      <Link className="edit-link" to={`/campuses/${props.campus.id}/edit`}>
+        Edit
+      </Link>
+      <button onClick={() => props.handleDelete(props.campus.id)}>
+        Delete
+      </button>
     </>
   );
 };

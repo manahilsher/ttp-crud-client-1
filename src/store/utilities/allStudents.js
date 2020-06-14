@@ -85,14 +85,6 @@ export const deleteStudentThunk = id => dispatch => {
     .catch(err => console.log(err));
 };
 
-export const fetchAllStudentsThunk = () => dispatch => {
-  return axios
-    .get('/api/students')
-    .then(res => res.data)
-    .then(students => dispatch(fetchAllStudents(students)))
-    .catch(err => console.log(err));
-};
-
 export const enrollStudentThunk = (campusId, studentId) => dispatch => {
   return axios
     .put(`/api/students/${studentId}`, { campusId: campusId })
