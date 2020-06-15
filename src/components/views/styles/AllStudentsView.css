@@ -1,9 +1,29 @@
-.all-campuses {
-  color: tomato;
-}
 .add-student {
-  border: 2px solid teal;
-  padding: 10px;
-  margin: 20px;
-  background-color: white;
+  margin-top: 10px;
+  position: absolute;
+  right: 5rem;
+}
+
+.card {
+  width: 18rem;
+  margin: 1rem;
+  background-color: rgb(231, 231, 170);
+}
+
+.card-text {
+  color: black;
+}
+
+.card-title {
+  color: rgb(128, 0, 17);
+}
+
+.delete-button {
+  background-color: black;
+  margin-right: 5px;
+}
+
+.page-title {
+  margin-top: 10px;
+  color: rgb(128, 0, 17);
 }
