@@ -28,15 +28,16 @@ class AddStudentToCampusContainer extends Component {
     console.log(this.props);
     return (
       <div>
-        <h3>Hello from AddStudentToCampusContainer</h3>
-
         <form onSubmit={this.handleSubmit}>
-          <select name="studentId" onChange={this.handleChange}>
-            <option value="">Please select a student</option>
+          <select
+            name="studentId"
+            onChange={this.handleChange}
+            style={{ marginTop: '1rem' }}
+          >
+            <option value="">Enroll a Student </option>
             {this.props.allStudents
               .filter(s => s.campusId !== this.props.campusId)
               .map(student => {
-                console.log(student.campusId);
                 return (
                   <option value={student.id} key={student.id}>
                     {student.firstName}
@@ -44,7 +45,17 @@ class AddStudentToCampusContainer extends Component {
                 );
               })}
           </select>
-          <button type="submit">Enroll Student</button>
+          <button
+            type="submit"
+            className="btn"
+            style={{
+              border: 'solid black',
+              marginLeft: '1rem',
+              lineHeight: '12px'
+            }}
+          >
+            Enroll
+          </button>
         </form>
       </div>
     );

@@ -1,3 +1,13 @@
 .edit-button {
   margin-right: 5px;
 }
+
+.buttons {
+  margin-top: 10px;
+  position: absolute;
+  right: 5rem;
+}
+
+.student-image {
+  margin-top: 10px;
+}

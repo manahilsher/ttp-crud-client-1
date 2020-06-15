@@ -1,7 +1,7 @@
-ul.students {
-  list-style-type: none;
-}
-
-li.student-name a {
+.list-group-item {
   color: red;
+  background-color: rgb(231, 231, 170);
+  width: 20%;
+  line-height: 10px;
+  margin: auto;
 }

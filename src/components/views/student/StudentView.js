@@ -7,12 +7,12 @@ const StudentView = props => {
   if (props.student.campus) {
     campusDisplay = (
       <div>
-        <p>
+        <h6>
           Student at{' '}
           <Link to={`/campuses/${props.student.campus.id}`}>
             {props.student.campus.name}
           </Link>
-        </p>
+        </h6>
       </div>
     );
   } else {
@@ -21,17 +21,7 @@ const StudentView = props => {
 
   return (
     <>
-      <img
-        src={props.student.imageUrl}
-        alt={props.student.email}
-      ></img>
-      <div className="card-body">
-        <h1 className="card-title">
-          {props.student.firstName} {props.student.lastName}
-        </h1>
-        <p className="card-text">Email: {props.student.email}</p>
-        <p className="card-text">GPA: {props.student.gpa}</p>
-        {campusDisplay}
+      <div className="buttons">
         <Link
           className="btn btn-info edit-button"
           to={`/students/${props.student.id}/edit`}
@@ -44,6 +34,19 @@ const StudentView = props => {
         >
           Remove
         </button>
+      </div>
+      <div>
+        <img
+          src={props.student.imageUrl}
+          alt={props.student.email}
+          className="student-image"
+        ></img>
+        <h1 className="card-title">
+          {props.student.firstName} {props.student.lastName}
+        </h1>
+        <h6>Email: {props.student.email}</h6>
+        <h6>GPA: {props.student.gpa}</h6>
+        {campusDisplay}
       </div>
     </>
   );

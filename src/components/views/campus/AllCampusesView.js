@@ -10,12 +10,12 @@ const AllCampusesView = props => {
 
   return (
     <div className="ui container">
-      <div className="page-title">
-        <h1>CAMPUSES</h1>
-      </div>
       <Link to="/campuses/new" className="btn btn-success add-campus">
         New Campus
       </Link>
+      <div className="page-title">
+        <h1>CAMPUSES</h1>
+      </div>
       <div className="all-campuses row">
         {props.allCampuses.map(campus => (
           <div key={campus.id} className="card">

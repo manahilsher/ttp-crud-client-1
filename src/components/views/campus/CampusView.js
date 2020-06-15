@@ -9,25 +9,42 @@ import {
 const CampusView = props => {
   return (
     <>
-      <img src={props.campus.imageUrl} alt={props.campus.name} />
-      <h1>{props.campus.name}</h1>
-      <h3>{props.campus.address}</h3>
+      <div className="buttons">
+        <Link
+          className="btn btn-info edit-button"
+          to={`/campuses/${props.campus.id}/edit`}
+        >
+          Edit
+        </Link>
 
-      <p>{props.campus.description}</p>
+        <button
+          onClick={() => props.handleDelete(props.campus.id)}
+          className="btn text-warning delete-button"
+        >
+          Remove
+        </button>
+      </div>
 
-      <StudentNameListContainer students={props.campus.students} />
+      <div>
+        <img
+          src={props.campus.imageUrl}
+          alt={props.campus.name}
+          className="campus-image"
+        />
 
-      <AddStudentToCampusContainer
-        campusId={props.campus.id}
-        handleEnrollStudent={props.handleEnrollStudent}
-      />
+        <h1 className="card-title">{props.campus.name}</h1>
 
-      <Link className="edit-link" to={`/campuses/${props.campus.id}/edit`}>
-        Edit
-      </Link>
-      <button onClick={() => props.handleDelete(props.campus.id)}>
-        Delete
-      </button>
+        <h6>Address: {props.campus.address}</h6>
+
+        <p>{props.campus.description}</p>
+
+        <AddStudentToCampusContainer
+          campusId={props.campus.id}
+          handleEnrollStudent={props.handleEnrollStudent}
+        />
+
+        <StudentNameListContainer students={props.campus.students} />
+      </div>
     </>
   );
 };
